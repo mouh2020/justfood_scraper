@@ -5,13 +5,14 @@ from database import create_db_and_tables,engine,Article
 from loguru import logger
 from utils.process_requests import make_request
 from sqlmodel import Session,select
-
+import time
 logger.add("justfood_scraper.log",format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {function} | {message}",colorize=False,enqueue=True,mode="w")
 
 create_db_and_tables()
 recipes_url ="https://www.justfood.tv/أجدد-وصفات/اطباق-رئيسية/next_page_number/articles_page_number"
 
 for i in range(1,250) : 
+    time.sleep(1.5)
     try :
         for j in range(1,500) :
             url_to_scrape = build_decoding_url(url=recipes_url,
@@ -37,7 +38,7 @@ for i in range(1,250) :
                 article_html_code = make_request(url=article_link)
                 #print(article_html_code)
                 article_body_html = get_article_body(article_html_code=article_html_code)
-                article = clean_article(article_body_html)
+                article = clean_article(str(article_body_html))
                 #### Add images
                 #article = add_image_link_to_article(article)
                 ##### Process article title.
@@ -49,10 +50,12 @@ for i in range(1,250) :
                 article_to_insert = Article(
                     article_id=article_id,
                     title=title,
-                    article_text=article
+                    article_text=article_body_html.text,
+                    article_html=str(article)
                 )
                 database_session.add(article_to_insert)
                 database_session.commit()
+                time.sleep(1.5)
     except Exception as e : 
         logger.error(f'error occured : {str(e)}')
 
