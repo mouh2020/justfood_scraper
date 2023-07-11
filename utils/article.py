@@ -9,7 +9,7 @@ def check_article_link(link) :
         return link
 def get_article_body(article_html_code) : 
     soup = BeautifulSoup(article_html_code,"lxml")
-    return str(soup.find('div',attrs={'class':'article-body'})).rjust(0)
+    return soup.find('div',attrs={'class':'article-body'})
 
 def get_article_id(link : str) : 
     return link.split('/')[-2]
