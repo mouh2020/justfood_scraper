@@ -58,12 +58,3 @@ for i in range(1,250) :
                 time.sleep(1.5)
     except Exception as e : 
         logger.error(f'error occured : {str(e)}')
-
-
-
-
-        
-        
-        
-        
-        
