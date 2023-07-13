@@ -20,3 +20,9 @@ def build_decoding_url(url,next_page_number,articles_page_number) :
     url = url.replace('next_page_number',next_page_number)
     url = url.replace('articles_page_number',articles_page_number)
     return url
+
+def get_article_pages_number(html_page_code) : 
+    soup = BeautifulSoup(html_page_code,"lxml")
+    pages_number_tag = soup.find('div',attrs={'class':"pag2"})
+    if pages_number_tag : 
+        return int(pages_number_tag.text.strip())
