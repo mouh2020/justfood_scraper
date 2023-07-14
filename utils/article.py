@@ -22,7 +22,7 @@ def add_image_link_to_article(article_html_code :str ) :
     images = soup.findAll('img')
     for image in images :
         if "/UserFiles" in str(image) :
-            del image["src"]
+            image["src"] = "https://justfood.tv"+image["src"]
     return str(soup)
 
 def remove_links_from_article(article_html_code :str) : 
