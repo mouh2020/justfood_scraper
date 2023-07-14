@@ -27,7 +27,6 @@ for i in range(1,500) :
             continue
         for j in range(1,article_pages_number+1) : 
             articles_links = get_all_articles_links(html_code=page_html_code)
-            logger.info(f'articles_links_number : {len(articles_links)}')
             if articles_links == None :  
                 continue
             for article_link in articles_links : 
