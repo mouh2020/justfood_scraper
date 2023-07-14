@@ -18,4 +18,15 @@ def clean_article(article_html_code : str) :
     return article_html_code.replace('\r','').replace('\n','').replace('\t','')
 
 def add_image_link_to_article(article_html_code :str ) : 
-    return
+    soup = BeautifulSoup(article_html_code,"lxml")
+    images = soup.findAll('img')
+    for image in images :
+        if "/UserFiles" in str(image) :
+            del image["src"]
+    return str(soup)
+
+def remove_links_from_article(article_html_code :str) : 
+    soup = BeautifulSoup(article_html_code,"lxml")
+    for a in soup.findAll('a'):
+        del a['href']
+    return str(soup)
