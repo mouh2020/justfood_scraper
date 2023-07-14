@@ -8,6 +8,7 @@ class Article(SQLModel, table=True):
     title           : Optional[str]     = Field(default=None)
     article_text           : Optional[str]     = Field(default=None)
     article_html           : Optional[str]     = Field(default=None)
+    is_posted : bool = False
 
 sqlite_file_name = "justfood_database.db"
 sqlite_url = f"sqlite:///{sqlite_file_name}"
