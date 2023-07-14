@@ -43,6 +43,7 @@ while True :
         database_session.add(article)
         database_session.commit()
     database_session.close()
+    time.sleep(1)
     
 
 
